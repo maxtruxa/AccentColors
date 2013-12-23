@@ -1,0 +1,25 @@
+﻿<Window x:Class="AccentColors.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AccentColors"
+        Title="MainWindow" Height="512" Width="480" MinWidth="430" MinHeight="150">
+    <Grid>
+        <CheckBox x:Name="CheckBoxFilter" Content="Only show colors" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Checked="CheckBoxFilter_Checked" Unchecked="CheckBoxFilter_Checked"/>
+        <Button x:Name="ButtonFilterColor" Content="similar to" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="80" Height="23" Click="ButtonFilterColor_Click"/>
+        <Label Content="Tolerance:" HorizontalAlignment="Right" Margin="0,9,125,0" VerticalAlignment="Top" Width="63"/>
+        <ComboBox x:Name="ComboBoxTolerance" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="100" SelectionChanged="ComboBoxTolerance_SelectionChanged"/>
+        <ListBox x:Name="ListBoxColors" Margin="10,47,10,10" ItemsSource="{Binding DisplayedColors}">
+            <ListBox.Resources>
+                <local:ColorToBackgroundConverter x:Key="BackgroundConverter"/>
+                <local:ColorToForegroundConverter x:Key="ForegroundConverter"/>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"
+                               Foreground="{Binding Converter={StaticResource ForegroundConverter}}"
+                               Background="{Binding Converter={StaticResource BackgroundConverter}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
